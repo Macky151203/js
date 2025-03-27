@@ -12,11 +12,13 @@ function App() {
   useEffect(() => {
     const fetcheddata = JSON.parse(localStorage.getItem("todo"));
     console.log(fetcheddata);
-    const temptodo = fetcheddata.filter((item) => item.completed == false);
-    const tempcomp = fetcheddata.filter((item) => item.completed == true);
-    setdata(fetcheddata);
-    settodotasks(temptodo);
-    setcomptasks(tempcomp);
+    if (fetcheddata) {
+      const temptodo = fetcheddata.filter((item) => item.completed == false);
+      const tempcomp = fetcheddata.filter((item) => item.completed == true);
+      setdata(fetcheddata);
+      settodotasks(temptodo);
+      setcomptasks(tempcomp);
+    }
   }, []);
 
   const add = (e) => {
@@ -38,15 +40,14 @@ function App() {
     setname("");
     settask("");
     alert("new task added!");
-    
   };
 
-  const completedtask=(i)=>{
+  const completedtask = (i) => {
     let filtereddata1 = data.filter(
       (item) => !(item.task === i.task && item.name === i.name)
     );
-     filtereddata1=[...filtereddata1,{...i,completed:true}]
-     console.log("filtered completed",filtereddata1)
+    filtereddata1 = [...filtereddata1, { ...i, completed: true }];
+    console.log("filtered completed", filtereddata1);
     const temptodo = filtereddata1.filter((item) => item.completed == false);
     const tempcomp = filtereddata1.filter((item) => item.completed == true);
     setdata(filtereddata1);
@@ -54,7 +55,7 @@ function App() {
     setcomptasks(tempcomp);
     console.log(filtereddata1);
     localStorage.setItem("todo", JSON.stringify(filtereddata1));
-  }
+  };
 
   const deletetask = (name, task) => {
     const filtereddata = data.filter(
@@ -79,7 +80,7 @@ function App() {
           >
             <div className="text-center text-2xl my-2">Enter The task here</div>
             <input
-            value={name}
+              value={name}
               placeholder="Enter name"
               className="md:w-1/2 border-1 rounded-md p-1"
               type="text"
@@ -89,7 +90,7 @@ function App() {
               required
             />
             <input
-            value={task}
+              value={task}
               placeholder="Enter task"
               className="md:w-1/2 border-1 rounded-md p-1"
               type="text"
@@ -117,23 +118,30 @@ function App() {
                     todotasks.map((item, i) => {
                       return (
                         <div
-                          className="shadow-md rounded-t-lg w-full md:w-1/2 pb-2"
+                          className="shadow-lg border border-1 rounded-lg w-full md:w-1/2 pb-2"
                           key={i}
                         >
-                          <div className="bg-slate-200 px-2 rounded-t-lg">Name-{item.name}</div>
+                          <div className="bg-slate-200 px-2 rounded-t-lg">
+                            Name-{item.name}
+                          </div>
                           <div className="px-2 my-2">{item.task}</div>
                           <div className="flex gap-1 px-2">
-                          <button
-                            className="rounded-md cursor-pointer bg-red-400 text-white px-2 p-1"
-                            onClick={() => {
-                              deletetask(item.name, item.task);
-                            }}
-                          >
-                            Del
-                          </button>
-                          <button className="rounded-md cursor-pointer border-1 text-green-500 border-green-400  px-2 p-1" onClick={()=>{completedtask(item)}}>
-                            Set completed
-                          </button>
+                            <button
+                              className="rounded-md cursor-pointer bg-red-400 text-white px-2 p-1"
+                              onClick={() => {
+                                deletetask(item.name, item.task);
+                              }}
+                            >
+                              Del
+                            </button>
+                            <button
+                              className="rounded-md cursor-pointer border-1 text-green-500 border-green-400  px-2 p-1"
+                              onClick={() => {
+                                completedtask(item);
+                              }}
+                            >
+                              Set completed
+                            </button>
                           </div>
                         </div>
                       );
@@ -151,20 +159,22 @@ function App() {
                     comptasks.map((item, i) => {
                       return (
                         <div
-                          className="shadow-md rounded-t-lg w-full md:w-1/2 pb-2"
+                          className="shadow-md border border-1 rounded-lg w-full md:w-1/2 pb-2"
                           key={i}
                         >
-                          <div className="bg-slate-200 px-2 rounded-t-lg p-1">Name-{item.name}</div>
+                          <div className="bg-slate-200 px-2 rounded-t-lg p-1">
+                            Name-{item.name}
+                          </div>
                           <div className="px-2 my-2">{item.task}</div>
                           <div className="flex gap-1 px-2">
-                          <button
-                            className="rounded-md cursor-pointer bg-red-400 text-white px-2 p-1"
-                            onClick={() => {
-                              deletetask(item.name, item.task);
-                            }}
-                          >
-                            Del
-                          </button>
+                            <button
+                              className="rounded-md cursor-pointer bg-red-400 text-white px-2 p-1"
+                              onClick={() => {
+                                deletetask(item.name, item.task);
+                              }}
+                            >
+                              Del
+                            </button>
                           </div>
                         </div>
                       );
