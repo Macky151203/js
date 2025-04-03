@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPA with Hash Routing</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        nav {
+            margin-bottom: 20px;
+        }
+        nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            font-size: 18px;
+            color: blue;
+        }
+        .view {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    
+    <div id="home" class="view active">
+      <h1>Home</h1>
+        <p>This is the home page</p>
+    </div>
+    
+    <div id="about" class="view">
+        <h1>About Us</h1>
+        <p>This is the about page where we describe our project.</p>
+    </div>
+    
+    <div id="contact" class="view">
+        <h1>Contact Us</h1>
+        <p>This is the contact page. Get in touch!</p>
+    </div>
+
+    <script>
+        function navigate() {
+            let hash = window.location.hash.substring(1) || 'home';
+            document.querySelectorAll('.view').forEach(view => {
+                view.classList.remove('active');
+            });
+            document.getElementById(hash)?.classList.add('active');
+        }
+        
+        window.addEventListener('hashchange', navigate);
+        window.addEventListener('load', navigate);
+    </script>
+</body>
+</html>

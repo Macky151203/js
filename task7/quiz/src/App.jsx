@@ -35,8 +35,8 @@ function App() {
   const [completed, setCompleted] = useState(false);
   const [iscorr, setiscorr] = useState(false);
 
-  const handleOptionChange = (event) => {
-    setSelectedOption(event.target.value);
+  const handleOptionChange = (e) => {
+    setSelectedOption(e.target.value);
   };
 
   const restart = () => {

@@ -1,5 +1,5 @@
 {
-  "name": "realtimechat",
+  "name": "shop",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,12 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@tailwindcss/postcss": "^4.0.17",
+    "@tailwindcss/postcss": "^4.1.1",
     "postcss": "^8.5.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.4.1",
-    "tailwindcss": "^4.0.17"
+    "tailwindcss": "^4.1.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
